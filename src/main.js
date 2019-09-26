@@ -15,10 +15,14 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import GridOnIcon from "@material-ui/icons/GridOn";
+
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Buttons from "./components/buttons/buttons";
+import GridComponent from "./components/grid/grid";
 import Dashboard from "./components/dashboard";
 import NotFound from "./components/notfound";
 import useStyles from "./main.useStyles";
@@ -38,7 +42,8 @@ export default function Main({ title }) {
 
   const linksButtons = [
     { text: "DashBoard", pathLink: "/" },
-    { text: "Botões", pathLink: "/botoes" }
+    { text: "Botões", pathLink: "/botoes" },
+    { text: "Grade", pathLink: "/grade" }
   ];
 
   return (
@@ -93,7 +98,7 @@ export default function Main({ title }) {
           </div>
           <Divider />
           <List>
-            {linksButtons.map((btns, index) => (
+            {linksButtons.map(btns => (
               <ListItem
                 button
                 key={btns.text}
@@ -107,6 +112,8 @@ export default function Main({ title }) {
                         return <CheckCircle />;
                       case "DashBoard":
                         return <DashboardIcon />;
+                      case "Grade":
+                        return <GridOnIcon />;
                       default:
                         return null;
                     }
@@ -123,6 +130,7 @@ export default function Main({ title }) {
           <Switch>
             <Route path="/" exact component={Dashboard} />
             <Route path="/botoes" exact component={Buttons} />
+            <Route path="/grade" exact component={GridComponent} />
             <Route component={NotFound} />
           </Switch>
         </main>
