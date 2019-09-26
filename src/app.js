@@ -3,7 +3,7 @@ import React from "react";
 import Main from "./main";
 
 function App() {
-  return <Main />;
+  return <Main title="Componentes Material-UI" />;
 }
 
 export default App;

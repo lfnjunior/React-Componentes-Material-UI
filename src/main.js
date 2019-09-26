@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,75 +17,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Buttons from "./components/buttons/buttons";
 import Dashboard from "./components/dashboard";
 import NotFound from "./components/notfound";
+import useStyles from "./main.useStyles";
 
-const drawerWidth = 240;
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex"
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: 36
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap"
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerClose: {
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    overflowX: "hidden",
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing(9) + 1
-    }
-  },
-  toolbar: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3)
-  }
-}));
-
-export default function Main() {
+export default function Main({ title }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -126,7 +64,7 @@ export default function Main() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Componentes Material-UI
+              {title}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -156,23 +94,26 @@ export default function Main() {
           <Divider />
           <List>
             {linksButtons.map((btns, index) => (
-              <NavLink exact activeClassName="active" to={btns.pathLink}>
-                <ListItem button key={btns.text}>
-                  <ListItemIcon>
-                    {(function() {
-                      switch (btns.text) {
-                        case "Botões":
-                          return <CheckCircle />;
-                        case "DashBoard":
-                          return <DashboardIcon />;
-                        default:
-                          return null;
-                      }
-                    })()}
-                  </ListItemIcon>
-                  <ListItemText primary={btns.text} />
-                </ListItem>
-              </NavLink>
+              <ListItem
+                button
+                key={btns.text}
+                component={Link}
+                to={btns.pathLink}
+              >
+                <ListItemIcon>
+                  {(function() {
+                    switch (btns.text) {
+                      case "Botões":
+                        return <CheckCircle />;
+                      case "DashBoard":
+                        return <DashboardIcon />;
+                      default:
+                        return null;
+                    }
+                  })()}
+                </ListItemIcon>
+                <ListItemText primary={btns.text} />
+              </ListItem>
             ))}
           </List>
           <Divider />
