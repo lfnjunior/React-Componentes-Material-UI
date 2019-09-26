@@ -7,6 +7,7 @@ import {
 import { ThemeProvider } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import { green, purple } from "@material-ui/core/colors";
+import Divider from "@material-ui/core/Divider";
 
 const BootstrapButton = withStyles({
   root: {
@@ -58,6 +59,15 @@ const ColorButton = withStyles(theme => ({
 const useStyles = makeStyles(theme => ({
   margin: {
     margin: theme.spacing(1)
+  },
+  button: {
+    margin: theme.spacing(1)
+  },
+  input: {
+    display: "none"
+  },
+  section: {
+    margin: theme.spacing(2)
   }
 }));
 
@@ -72,26 +82,107 @@ export default function Buttons() {
 
   return (
     <div>
-      <ColorButton
-        variant="contained"
-        color="primary"
-        className={classes.margin}
-      >
-        Custom CSS
-      </ColorButton>
-      <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" className={classes.margin}>
-          Theme Provider
+      <div className={classes.section}>
+        <ColorButton
+          variant="contained"
+          color="primary"
+          className={classes.margin}
+        >
+          Custom CSS
+        </ColorButton>
+        <ThemeProvider theme={theme}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.margin}
+          >
+            Theme Provider
+          </Button>
+        </ThemeProvider>
+        <BootstrapButton
+          variant="contained"
+          color="primary"
+          disableRipple
+          className={classes.margin}
+        >
+          Bootstrap
+        </BootstrapButton>
+      </div>
+      <Divider variant="middle" />
+      <div className={classes.section}>
+        <Button variant="contained" className={classes.button}>
+          Default
         </Button>
-      </ThemeProvider>
-      <BootstrapButton
-        variant="contained"
-        color="primary"
-        disableRipple
-        className={classes.margin}
-      >
-        Bootstrap
-      </BootstrapButton>
+        <Button variant="contained" color="primary" className={classes.button}>
+          Primary
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+        >
+          Secondary
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          disabled
+          className={classes.button}
+        >
+          Disabled
+        </Button>
+        <Button
+          variant="contained"
+          href="#contained-buttons"
+          className={classes.button}
+        >
+          Link
+        </Button>
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="contained-button-file"
+          multiple
+          type="file"
+        />
+        <label htmlFor="contained-button-file">
+          <Button
+            variant="contained"
+            component="span"
+            className={classes.button}
+          >
+            Upload
+          </Button>
+        </label>
+      </div>
+      <Divider variant="middle" />
+      <div className={classes.section}>
+        <Button className={classes.button}>Default</Button>
+        <Button color="primary" className={classes.button}>
+          Primary
+        </Button>
+        <Button color="secondary" className={classes.button}>
+          Secondary
+        </Button>
+        <Button disabled className={classes.button}>
+          Disabled
+        </Button>
+        <Button href="#text-buttons" className={classes.button}>
+          Link
+        </Button>
+        <input
+          accept="image/*"
+          className={classes.input}
+          id="text-button-file"
+          multiple
+          type="file"
+        />
+        <label htmlFor="text-button-file">
+          <Button component="span" className={classes.button}>
+            Upload
+          </Button>
+        </label>
+      </div>
     </div>
   );
 }

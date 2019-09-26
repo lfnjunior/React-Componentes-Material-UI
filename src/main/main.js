@@ -21,14 +21,14 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import GridOnIcon from "@material-ui/icons/GridOn";
 
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
-import Buttons from "./components/buttons/buttons";
-import GridComponent from "./components/grid/grid";
-import Dashboard from "./components/dashboard";
-import NotFound from "./components/notfound";
-import useStyles from "./main.useStyles";
+import Buttons from "../components/buttons/buttons";
+import GridComponent from "../components/grid/grid";
+import Dashboard from "../components/dashboard";
+import NotFound from "../components/notfound";
+import MainStyle from "./main.style";
 
 export default function Main({ title }) {
-  const classes = useStyles();
+  const classes = MainStyle();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
